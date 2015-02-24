@@ -1,0 +1,62 @@
+<template id="template-1">
+	<link rel="stylesheet" href="foo.css" />
+	<script src="foo.js"></script>
+    <p class="foo">IM COMING FROM A TEMPLATE</p>
+    <shadow id="host"></shadow>
+</template>
+<template id="template-2">
+	<!-- Stylesheet links are not allowed in shadow DOM. -->
+	<style>
+	p {
+		color: red;
+	}
+	</style>
+    <p class="foo">TEMPLATE 2</p>    
+</template>
+<script>
+(function() {
+
+    var importDoc, navBarProto;
+
+    importDoc = document.currentScript.ownerDocument;
+
+    navBarProto = Object.create(HTMLElement.prototype);
+    navBarProto.createdCallback = function() {
+        var template1, template1Clone, template2, template2Clone, shadow1, shadow2, host;
+
+        template1 = importDoc.querySelector('#template-1');
+        template1Clone = importDoc.importNode(template1.content, true);
+
+        template2 = importDoc.querySelector('#template-2');
+        template2Clone = importDoc.importNode(template2.content, true);
+
+        // Select shadow host. Element in the light DOM that will wrap it.
+        // Create a shadow root.
+        // Append elements to shadow DOM.
+        
+
+        host = template1Clone.getElementById('host');
+        // host = template1;
+        shadow1 = host.createShadowRoot();
+        shadow1.appendChild(template2Clone);
+
+        this.appendChild(template1Clone); // Insert into the DOM.
+
+        // debugger;
+        // template2 = importDoc.querySelector('#inner');
+        // template2Clone = importDoc.importNode(template2.content, true);
+
+        // shadow1.appendChild(template1Clone);
+        
+
+        // shadow2.appendChild(new Image());
+        // shadow2 = this.createShadowRoot();
+        // shadow2.innerHTML = '<span>This is from shadow2. </span><shadow></shadow>';
+    };
+
+    document.registerElement('wizerati-nav-bar', {
+        prototype: navBarProto
+    });
+
+}())
+</script>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>* { color: green; }</style>
+		<link rel="import" href="template-wizerati-nav-bar.html"/>
+	</head>
+	<body>
+	<p>Page content.</p>
+	<wizerati-nav-bar></wizerati-nav-bar>
+	<br/>
+	<br/>
+	<button onclick="foo()">Click me</button>
+	<!-- <wiz-app id="host" mode="whatever">
+		Welcome to Wizerati.
+	</wiz-app> -->
+	
+	<!-- <template id="template-wizerati-navbar">
+		<style>* {color: red; }</style>
+		<content select="h1"></content>
+		<ul>
+			<li>Search</li>
+			<li>Log Out</li>
+		</ul>
+		<content select=".foo"></content>
+	</template>
+ -->
+	<!-- <input type="date" />
+	I'm NOT coming from the template!
+	<template id="my-template">
+		MY TEMPLATE
+	</template>
+	<button onclick="copyTemplate()">Copy template</button> -->
+	<script>
+		// var myTemplate = document.querySelector('#outer');			
+		// var myTemplateClone = document.importNode(myTemplate.content, true);	
+		// console.log(template);
+
+
+		// function copyTemplate() {
+		// 	var myTemplate, barTemplate, myTemplateClone, barTemplateClone;
+
+		// 	myTemplate = document.querySelector('#my-template');	
+		// 	myTemplateClone = document.importNode(myTemplate.content, true);		
+		// 	document.body.appendChild(myTemplateClone);		
+		// }
+
+		// var WizAppProto = Object.create(HTMLElement.prototype);
+		// WizAppProto.createdCallback = function() {
+		// 	console.log('created');
+		// }
+
+		// WizAppProto.attachedCallback = function() {
+		// 	console.log('attached');
+		// };
+
+		// WizAppProto.attributeChangedCallback = function(attrName, oldValue, newValue) {
+		// 	console.log(attrName, oldValue, newValue);
+		// };
+
+		// document.registerElement('wiz-app', { prototype: WizAppProto });
+
+		// var NavbarProto = Object.create(HTMLElement.prototype);
+		// NavbarProto.createdCallback = function() {
+		// 	var template = document.querySelector('#template-wizerati-navbar');
+		// 	var shadow = this.createShadowRoot();
+		// 	var shadow2 = this.createShadowRoot();
+		// 	shadow.appendChild(document.importNode(template.content, true));
+		// 	shadow2.innerHTML = '<span>This is from shadow2. </span><shadow></shadow>';
+		// };
+
+		// document.registerElement('wizerati-nav-bar', { prototype: NavbarProto });
+
+		
+		// var host = document.getElementById('host');
+		// var root = host.createShadowRoot();
+		// var t = document.querySelector('#template-wizerati-navbar');	
+		// root.appendChild(document.importNode(t.content, true))
+	</script>
+	</body>
+</html>
