@@ -1,0 +1,82 @@
+<template id="my-template">
+    <style>
+    p {
+        color: blue;
+    }
+    </style>
+    <p class="foo">BAR</p>
+    <shadow id="host">
+    </shadow>
+</template>
+<template id="my-template-2">
+	<style>
+	p {
+		color: red;
+	}
+	</style>
+    <p class="foo">BAM</p>    
+    <h1>BAM</h1> 
+    <!-- Invite light DOM of shadow host into shadow dom. -->
+    <content select="img"></content>   
+</template>
+<template id="my-template-3">
+	<style>
+	p {
+		color: orange;
+		text-decoration: underline;
+	}
+	</style>
+    <p class="foo">BAZ</p>    
+    <!-- Invite light DOM of shadow host into shadow dom. -->
+    <content select="img"></content>   
+    <!-- <content select="ben"></content>    -->
+</template>
+<script>
+(function() {
+
+    var importDoc, myComponentProto, myComponentProto2;
+
+    importDoc = document.currentScript.ownerDocument;
+    myComponentProto = Object.create(HTMLElement.prototype);
+    myComponentProto2 = Object.create(HTMLElement.prototype);
+
+    myComponentProto.createdCallback = function() {
+        var template1, template1Clone, template2, template2Clone, shadow1;
+
+        template1 = importDoc.querySelector('#my-template');
+        template1Clone = importDoc.importNode(template1.content, true);
+
+        template2 = importDoc.querySelector('#my-template-2');
+        template2Clone = importDoc.importNode(template2.content, true);
+
+		host = template1Clone.getElementById('host');
+        shadow1 = host.createShadowRoot();
+        shadow1.appendChild(template2Clone);        
+
+        this.appendChild(template1Clone); // Insert into the DOM.
+    };
+
+    myComponentProto2.createdCallback = function() {
+    	debugger;
+        var template, templateClone, shadow;
+
+        template = importDoc.querySelector('#my-template-3');
+        templateClone = importDoc.importNode(template.content, true);
+
+		host = this;//template1Clone.getElementById('host');
+        shadow = this.createShadowRoot();
+        shadow.appendChild(templateClone);        
+
+        // this.appendChild(templateClone); // Insert into the DOM.
+    };
+
+    document.registerElement('my-component', {
+        prototype: myComponentProto
+    });
+
+    document.registerElement('my-button', {
+        prototype: myComponentProto2
+    });
+
+}())
+</script>
